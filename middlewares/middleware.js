@@ -22,7 +22,7 @@ const tokenGenerator = (user, callback) => {
 
 //endpoint to decode token provided by the user and check if to authorize the request or not
 const authorizeUser = (req, res, next) => {
-    const token = req.headers.authorization || req.headers["x-access-token"];
+    const token = req.headers.authorization || req.headers["x-access-token"] || req.body.token;
     if(token) {
         jwt.verify(token, process.env.SECRET, (err, decoded) => {
             if(err) {

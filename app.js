@@ -1,7 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const routes = require("./routes");
-// const bodyParser = require("body-parser");
 const { Client } = require("pg");
 const cors = require("cors");
 
@@ -15,11 +14,18 @@ app.use(cors());
 
 app.use(express.json());
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,PUT,PATCH,POST,DELETE");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  next();
+});
+
 app.use(express.urlencoded({ extended: true }));
 
-// app.use(bodyParser.json());
-
-// app.use(bodyParser.urlencoded({ extended: true }));
 
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
@@ -32,6 +38,7 @@ client
   .then(() => {
     console.log("database connected!");
 
+    //create table for users
     client.query(
       `CREATE TABLE IF NOT EXISTS users(
         id serial PRIMARY KEY,
@@ -56,6 +63,7 @@ client
                 destination VARCHAR NOT NULL,
                 recipient_name VARCHAR NOT NULL,
                 recipient_phone_no VARCHAR NOT NULL,
+                description VARCHAR NOT NULL,
                 status VARCHAR DEFAULT 'in transit'
                 )`,
             (err, res) => {

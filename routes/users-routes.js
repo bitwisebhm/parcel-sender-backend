@@ -1,5 +1,4 @@
 const express = require('express');
-// const bodyParser = require('body-parser');
 const { createUser, userLogin, getUser } = require('../controllers/users-controller');
 const { check } = require('express-validator');
 const { authorizeUser } = require('../middlewares/middleware.js');
@@ -13,25 +12,32 @@ app.use(express.urlencoded({ extended: true }));
 // app.use(bodyParser.json());
 
 
-//Route for registration
+//Endpoint to create User acct
  app.post('/users', 
  [
     check('first_name')
         .isAlpha()
         .withMessage('First name must be alphabets only')
         .isLength({min: 3, max: 20})
-        .withMessage('First name be of 3 characters and above'),
+        .withMessage('First name must be of 3 characters and above'),
+
     check('last_name')
         .isAlpha()
         .withMessage('First name must be alphabets only')
         .isLength({min: 3, max: 20})
         .withMessage('First name be of 3 characters and above'),
+
     check('email', 'Email must be valid').isEmail(),
-    check('phone_no', 'Mobile number must be valid').isMobilePhone(),
+
+    check('phone_no', 'Mobile number must be valid').isMobilePhone()
+        .matches(/(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))\s*[)]?[-\s\.]?[(]?[0-9]{1,3}[)]?([-\s\.]?[0-9]{3})([-\s\.]?[0-9]{3,4})/g)   
+        .withMessage('please include your country code.. e.g -> +2347012345678'), 
+
     check('password')
         .isLength({min: 5})
         .withMessage('Password must have a minimum length of 5')
 ], createUser);
+
 
 //endpoint for logging in
 app.post('/users/login', userLogin);

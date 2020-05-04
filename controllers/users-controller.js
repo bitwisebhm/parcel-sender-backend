@@ -1,12 +1,10 @@
 const express = require ("express");
-// const bodyParser = require ("body-parser");
 const { validationResult } = require ("express-validator");
 const { tokenGenerator } = require ("../middlewares/middleware");
 
 const app = express();
 
 app.use(express.json());
-// app.use(bodyParser.json());
 
 //request for creating user account(registration)
 const createUser = (req, res) => {
@@ -16,8 +14,10 @@ const createUser = (req, res) => {
     if(!errors.isEmpty()) {
         return res.json({ errors: errors.array() });
     } else {
-        client.query("INSERT INTO users (first_name, last_name, email, phone_no, password) VALUES ($1, $2, $3, $4, $5) RETURNING *", [first_name, last_name, email, phone_no, password], (err, user) => {
-            // console.log("error:", err, "user:", user); 
+        //client.query("INSERT INTO users (first_name, last_name, email, phone_no,password, role) VALUES ('Bakare', 'Moruf', 'murphydemn@gmail.com', '07061232596', '#murphy2506', 'admin') RETURNING *", [first_name, last_name, email, phone_no, password, role], (err, user) => {
+        client.query(
+            "INSERT INTO users (first_name, last_name, email, phone_no, password) VALUES ($1, $2, $3, $4, $5) RETURNING * ", [ first_name, last_name, email, phone_no, password ], (err, user) => {
+            console.log("error:", err, "user:", user); 
             if(err) {
                 res.send({
                     msg: err.detail
