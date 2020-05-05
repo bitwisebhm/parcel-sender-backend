@@ -7,9 +7,11 @@
     "node": "8.12.0"
   },
   "scripts": {
-    "start": "node ./app.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start-dev": "nodemon ./app.js"
+    "lint": "eslint . --fix --ignore-path .eslintignore",
+    "test": "NODE_ENV=test mocha --compilers js:@babel/register",
+    "build": "rm -rf ./dist && babel . --out-dir ./dist --ignore ./node_modules,./.heroku",
+    "start": "npm run build && node dist/app.js",
+    "start-dev": "nodemon ./app.js --exec babel-node"
   },
   "author": "BHM",
   "license": "ISC",
