@@ -30,7 +30,7 @@ app.use(express.urlencoded({ extended: true }));
     check('email', 'Email must be valid').isEmail(),
 
     check('phone_no', 'Mobile number must be valid').isMobilePhone()
-        .matches(/(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))\s*[)]?[-\s\.]?[(]?[0-9]{1,3}[)]?([-\s\.]?[0-9]{3})([-\s\.]?[0-9]{3,4})/g)   
+        .matches(/^[+]{0,1}[0-9]{3}[0-9]{10}$/g)   
         .withMessage('please include your country code.. e.g -> +2347012345678'), 
 
     check('password')
