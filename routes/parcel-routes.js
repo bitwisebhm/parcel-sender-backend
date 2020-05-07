@@ -1,21 +1,18 @@
 const express = require('express');
-// const bodyParser = require('body-parser');
 const { createParcel, getParcels, getAllParcels, changePresentLocation, changeDestination, changeStatus, cancelParcel } = require('../controllers/parcels-controller');
 const { check } = require('express-validator');
-// import * as validator from 'express-validator';
 const { authorizeUser} = require('../middlewares/middleware.js');
 
 const app = express();
 
 app.use(express.json());
 
-// app.use(bodyParser.json());
 
 //create a new parcel order
 app.post('/parcels', [ 
     check('recipient_phone_no', 'Please enter a valid mobile Number').isMobilePhone()
-    .matches(/(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))\s*[)]?[-\s\.]?[(]?[0-9]{1,3}[)]?([-\s\.]?[0-9]{3})([-\s\.]?[0-9]{3,4})/g)   
-    .withMessage('please include your country code.. e.g -> +2347012345678')
+    .matches(/^[+]{0,1}[0-9]{3}[0-9]{10}$/g)   
+    .withMessage('please include your country code.. e.g -> +2347012345678'), 
 ], authorizeUser, createParcel);
 
 //get parcels in the admin page
