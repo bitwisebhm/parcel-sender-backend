@@ -18,20 +18,20 @@ app.use(express.urlencoded({ extended: true }));
     check('first_name')
         .isAlpha()
         .withMessage('First name must be alphabets only')
-        .isLength({min: 3, max: 20})
-        .withMessage('First name must be of 3 characters and above'),
+        .isLength({min: 1, max: 20})
+        .withMessage('First name must be of 1 character and above'),
 
     check('last_name')
         .isAlpha()
         .withMessage('First name must be alphabets only')
-        .isLength({min: 3, max: 20})
-        .withMessage('First name be of 3 characters and above'),
+        .isLength({min: 1, max: 20})
+        .withMessage('First name be of 1 character and above'),
 
     check('email', 'Email must be valid').isEmail(),
 
     check('phone_no', 'Mobile number must be valid').isMobilePhone()
         .matches(/^[+]{0,1}[0-9]{3}[0-9]{10}$/g)   
-        .withMessage('please include your country code.. e.g -> +2347012345678'), 
+        .withMessage('please include your country code.. e.g -> +2347061234567'), 
 
     check('password')
         .isLength({min: 5})
