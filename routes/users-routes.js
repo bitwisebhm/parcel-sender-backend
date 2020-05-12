@@ -13,29 +13,29 @@ app.use(express.urlencoded({ extended: true }));
 
 
 //Endpoint to create User acct
- app.post('/users', 
- [
-    check('first_name')
-        .isAlpha()
-        .withMessage('First name must be alphabets only')
-        .isLength({min: 1, max: 20})
-        .withMessage('First name must be of 1 character and above'),
+app.post('/users', 
+[
+    check('password')
+        .isLength({min: 5})
+        .withMessage('Password must have a minimum length of 5'),
 
+    check('phone_no', 'Mobile number must be valid').isMobilePhone()
+        .matches(/^[+]{0,1}[0-9]{3}[0-9]{10}$/g)   
+        .withMessage('please include your country code.. e.g -> +2347061234567'),   
+        
+    check('email', 'Email must be valid').isEmail(),
+        
     check('last_name')
         .isAlpha()
         .withMessage('First name must be alphabets only')
         .isLength({min: 1, max: 20})
         .withMessage('First name be of 1 character and above'),
 
-    check('email', 'Email must be valid').isEmail(),
-
-    check('phone_no', 'Mobile number must be valid').isMobilePhone()
-        .matches(/^[+]{0,1}[0-9]{3}[0-9]{10}$/g)   
-        .withMessage('please include your country code.. e.g -> +2347061234567'), 
-
-    check('password')
-        .isLength({min: 5})
-        .withMessage('Password must have a minimum length of 5')
+    check('first_name')
+        .isAlpha()
+        .withMessage('First name must be alphabets only')
+        .isLength({min: 1, max: 20})
+        .withMessage('First name must be of 1 character and above')
 ], createUser);
 
 

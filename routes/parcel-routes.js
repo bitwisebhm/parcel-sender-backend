@@ -10,9 +10,11 @@ app.use(express.json());
 
 //create a new parcel order
 app.post('/parcels', [ 
+    
     check('recipient_phone_no', 'Please enter a valid mobile Number').isMobilePhone()
-    .matches(/^[+]{0,1}[0-9]{3}[0-9]{10}$/g)   
-    .withMessage('please include your country code.. e.g -> +2347012345678'), 
+        .matches(/^[+]{0,1}[0-9]{3}[0-9]{10}$/g)   
+        .withMessage('please include your country code.. e.g -> +2347012345678')
+
 ], authorizeUser, createParcel);
 
 //get parcels in the admin page
