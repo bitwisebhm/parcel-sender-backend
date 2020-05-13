@@ -19,23 +19,24 @@ app.post('/users',
         .isLength({min: 5})
         .withMessage('Password must have a minimum length of 5'),
 
-    check('phone_no', 'Mobile number must be valid').isMobilePhone()
-        .matches(/^[+]{0,1}[0-9]{3}[0-9]{10}$/g)   
+    check('phone_no', 'Mobile number must be valid')
+        .matches(/^.{1,19}$/)
         .withMessage('please include your country code.. e.g -> +2347061234567'),   
         
     check('email', 'Email must be valid').isEmail(),
         
     check('last_name')
         .isAlpha()
-        .withMessage('First name must be alphabets only')
+        .withMessage('Last name must be alphabets only')
         .isLength({min: 1, max: 20})
-        .withMessage('First name be of 1 character and above'),
+        .withMessage('Last name be of 1 character and above'),
 
     check('first_name')
         .isAlpha()
         .withMessage('First name must be alphabets only')
         .isLength({min: 1, max: 20})
         .withMessage('First name must be of 1 character and above')
+
 ], createUser);
 
 
