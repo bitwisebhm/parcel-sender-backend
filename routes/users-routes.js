@@ -19,7 +19,7 @@ app.post('/users',
 
     check('phone_no', 'Mobile number must be valid')
         .matches(/^[+][1-9][0-9]*$/)
-        .withMessage('please include your country code.. e.g -> +2347061234567'),   
+        .withMessage('please include your country code.. e.g +2347061234567'),   
         
     check('email', 'Email must be valid').isEmail(),
         
