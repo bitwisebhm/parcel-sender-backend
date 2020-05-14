@@ -45,7 +45,7 @@ client
         first_name VARCHAR NOT NULL,
         last_name VARCHAR NOT NULL,
         email VARCHAR NOT NULL UNIQUE,
-        phone_no VARCHAR NOT NULL UNIQUE,
+        phone_no VARCHAR NOT NULL,
         password VARCHAR NOT NULL,
         role VARCHAR DEFAULT 'member'
         )`,

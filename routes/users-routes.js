@@ -9,8 +9,6 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
-// app.use(bodyParser.json());
-
 
 //Endpoint to create User acct
 app.post('/users', 
@@ -20,7 +18,7 @@ app.post('/users',
         .withMessage('Password must have a minimum length of 5'),
 
     check('phone_no', 'Mobile number must be valid')
-        .matches(/^.{1,19}$/)
+        .matches(/^[+][1-9][0-9]*$/)
         .withMessage('please include your country code.. e.g -> +2347061234567'),   
         
     check('email', 'Email must be valid').isEmail(),

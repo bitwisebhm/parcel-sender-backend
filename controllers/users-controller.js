@@ -19,7 +19,7 @@ const createUser = (req, res) => {
             console.log("error:", err, "user:", user); 
             if(err) {
                 res.send({
-                    msg: err.detail,
+                    msg: "Email Already exist, please login"//err//.detail//('Email Already exist, please login'),
                 });
             } else {
                 tokenGenerator(user.rows[0], (err, token) => {
