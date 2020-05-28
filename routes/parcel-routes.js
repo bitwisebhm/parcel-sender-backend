@@ -11,9 +11,9 @@ app.use(express.json());
 //create a new parcel order
 app.post('/parcels', [ 
     
-    check('recipient_phone_no', 'Please enter a valid mobile Number').isMobilePhone()
-        .matches(/^[+][1-9][0-9]*$/)   
-        .withMessage('please include your country code.. e.g -> +2347012345678')
+    check('recipient_phone_no')
+        .matches(/^[+][1-9][0-9]*$/)
+        .withMessage('please include your country code.. e.g +2347012345678')
 
 ], authorizeUser, createParcel);
 

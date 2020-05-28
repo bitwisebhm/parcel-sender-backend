@@ -19,7 +19,7 @@ const createUser = (req, res) => {
             console.log("error:", err, "user:", user); 
             if(err) {
                 res.send({
-                    msg: "Email Already exist, please login"//err//.detail//('Email Already exist, please login'),
+                    msg: "Email Already exist, please login", //err.detail
                 });
             } else {
                 tokenGenerator(user.rows[0], (err, token) => {
@@ -81,7 +81,8 @@ const getUser = (req, res) => {
 
     if(!errors.isEmpty()) {
         res.status(422).json({ errors: errors.array() });
-    } else {
+    }    
+    else {
         client.query(
             `SELECT * FROM users WHERE id = ${req.decoded.id}`,
             (err, resp) => {

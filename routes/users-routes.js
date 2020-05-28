@@ -17,9 +17,9 @@ app.post('/users',
         .isLength({min: 5})
         .withMessage('Password must have a minimum length of 5'),
 
-    check('phone_no', 'Mobile number must be valid')
+    check('phone_no')
         .matches(/^[+][1-9][0-9]*$/)
-        .withMessage('please include your country code.. e.g +2347061234567'),   
+        .withMessage('please include your country code.. e.g +2347012345678'),
         
     check('email', 'Email must be valid').isEmail(),
         
